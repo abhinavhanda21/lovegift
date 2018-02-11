@@ -135,39 +135,39 @@
 
             }
 
-            function showILoveYous(){
-                var i_love_you_s =  [
-                    { point: "43.97855, 15.38354", text: "Iloveyou" },
-                    { point: "43.97844, 15.38459", text: "I miss you"},
-                    { point: "43.97847, 15.38215", text: "I miss you" },
-                    { point: "43.97907, 15.38198", text: "I miss you" },
-                    { point: "43.97957, 15.38472", text: "I miss you" },
-                    { point: "43.98028, 15.38552",text: "I miss you" },
-                    { point: "43.97932, 15.38112", text: "I miss you" },
-                    { point: "43.97694, 15.38354", text: "I miss you" },
-                    { point: "43.97819, 15.38485", text: "I miss you" },
-                    { point: "43.97861, 15.38178", text: "I miss you" },
-                    { point: "43.97788, 15.38363", text: "I miss you"},
-                    { point: "43.97836, 15.38496", text: "I miss you" },
-                    { point: "43.97952, 15.38545", text: "I miss you"},
-                    { point: "43.97850, 15.38288", text: "I miss you"},
-                    { point: "43.97768, 15.38373", text: "I miss you" }
+            function showPhotos(){
+                var PHOTO_BASE = "photos/";
+                var photos = [
+                    { point: "43.97855, 15.38354", src: PHOTO_BASE + "you1.jpg" },
+                    { point: "43.97844, 15.38459", src: PHOTO_BASE + "you2.jpg" },
+                    { point: "43.97847, 15.38215", src: PHOTO_BASE + "you3.jpg" },
+                    { point: "43.97907, 15.38198", src: PHOTO_BASE + "you4.jpg" },
+                    { point: "43.97957, 15.38472", src: PHOTO_BASE + "you5.jpg" },
+                    { point: "43.98028, 15.38552", src: PHOTO_BASE + "you6.jpg" },
+                    { point: "43.97932, 15.38112", src: PHOTO_BASE + "me1.jpg" },
+                    { point: "43.97694, 15.38354", src: PHOTO_BASE + "you7.jpg" },
+                    { point: "43.97819, 15.38485", src: PHOTO_BASE + "you8.jpg" },
+                    { point: "43.97861, 15.38178", src: PHOTO_BASE + "you9.jpg" },
+                    { point: "43.97788, 15.38363", src: PHOTO_BASE + "you10.jpg" },
+                    { point: "43.97836, 15.38496", src: PHOTO_BASE + "me2.jpg" },
+
                 ];
                 var infowindows = [];
-                $.each(i_love_you_s, function(i, i_love_you){
-                    var point = i_love_you.point.split(",");
+                $.each(photos, function(i, photo){
+                    var point = photo.point.split(",");
                     var infowindow = new google.maps.InfoWindow({
-                        content: "<b>" + i_love_you.text + "</b>",
+                        content: "<img src='" + photo.src + "' style='width:400px;height:300px;' />",
                         position: new google.maps.LatLng(point[0], point[1])
                     });
                     infowindows.push(infowindow);
                 });
-
                 loopInfoWindows(infowindows, 2000, function(){
-                    map.panTo(DEFAULT_CENTER);
-                    setTimeout(function(){
-                        willYouLoveMeForever();
-                    }, 1000);
+                    map.panTo(HEART_ISLAND);
+                    smoothZoom(3, function(){
+                        map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+                        map.panTo(DEFAULT_CENTER);
+                        showILoveYous();
+                    });
                 });
 
             }
